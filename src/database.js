@@ -31,8 +31,14 @@ const DB = {
     // if sql file founc, re-create sqlite3 file from it
     if (fs.existsSync(sqlFile))  {
       console.log('.sql file found. re-creating .sqlite3 file from it', sqlFile);
-      runCommand(`rm -f ${sqlite3File}`);
-      runCommand(`sqlite3 ${sqlite3File} < ${sqlFile}`)
+      if(process.platform === 'win32'){
+        runCommand(`del /F ${sqlite3File}`);
+        runCommand(`sqlite3 ${sqlite3File} < ${sqlFile}`)
+      }
+      else{
+        runCommand(`rm -f ${sqlite3File}`);
+        runCommand(`sqlite3 ${sqlite3File} < ${sqlFile}`)
+      }
     } 
     // if sqlite3 file founc, create sql file from it
     else if (fs.existsSync(sqlite3File)) {

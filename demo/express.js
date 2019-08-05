@@ -4,7 +4,7 @@ const express = require('express');
 const path = require('path');
 const opn = require('opn');
 // const mockResponses = require(__dirname + '/../index.js')('./mock-responses.sqlite3');
-const mockResponses = require(__dirname + '/../index.js')('./demo/mock-responses.sqlite3');
+const mockResponses = require(__dirname + '/../index.js')('demo\\mock-responses.sqlite3');
 
 const app = express()
 mockResponses.forEach(mw => app.use(mw))
